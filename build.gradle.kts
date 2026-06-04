@@ -26,12 +26,14 @@ repositories {
 val springAiVersion = "1.1.2"
 
 dependencies {
-	implementation("org.springframework.ai:spring-ai-starter-mcp-server")
-	// The stdio MCP server factory references a Servlet environment class
-	// (StandardServletEnvironment) from spring-web. We add spring-web so the
-	// class is on the classpath. No web server is started: web-application-type
-	// stays "none", so this only satisfies the class reference.
-	implementation("org.springframework:spring-web")
+	// The WebMvc MCP server starter supports BOTH transports: the HTTP-based
+	// Streamable transport and the optional STDIO transport. The active
+	// transport is selected at runtime via Spring profiles (see application.yml
+	// and application-http.yml): STDIO by default, Streamable HTTP under the
+	// "http" profile. spring-boot-starter-web is pulled in for the HTTP server;
+	// it is harmless in STDIO mode where web-application-type stays "none".
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.ai:spring-ai-starter-mcp-server-webmvc")
 	implementation("net.sourceforge.plantuml:plantuml:1.2026.5")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

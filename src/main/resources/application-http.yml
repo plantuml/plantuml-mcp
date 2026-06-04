@@ -1,0 +1,35 @@
+# Streamable HTTP transport profile.
+#
+# Activate with: java -jar plantuml-mcp.jar --spring.profiles.active=http
+#
+# This profile overrides the default STDIO configuration: the server runs as a
+# normal Spring Boot web application listening on HTTP, able to serve multiple
+# clients. We use the modern Streamable HTTP protocol (protocol: STREAMABLE),
+# NOT the deprecated SSE transport.
+spring:
+  main:
+    # Run as a real web application (overrides the "none" set in the default
+    # profile). Console logging is fine here: stdout is not a transport channel.
+    banner-mode: console
+    web-application-type: servlet
+  ai:
+    mcp:
+      server:
+        name: plantuml-mcp
+        version: 1.0.0
+        type: SYNC
+        # Use the HTTP transport, not STDIO.
+        stdio: false
+        # Modern Streamable HTTP transport (replaces the deprecated SSE).
+        protocol: STREAMABLE
+        streamable-http:
+          mcp-endpoint: /mcp
+
+server:
+  port: 8080
+
+# In HTTP mode, stdout is not the MCP channel, so normal console logging is
+# restored (the default profile's empty console pattern does not apply here).
+logging:
+  file:
+    name: plantuml-mcp.log

@@ -1,0 +1,54 @@
+#
+# libs.versions.toml
+#
+# https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
+
+[versions]
+ant                 = "1.10.17"
+assertj             = "3.27.7"
+elk                 = "0.10.0"
+glytching-junit-ext = "2.6.0"
+gorylenko-gradle-git-properties = "4.0.1"
+graalvm-native      = "1.1.1"
+jdepend             = "2.9.1"
+jlatexmath          = "1.0.7"
+junit-jupiter       = "6.1.0"
+junit-platform-launcher = "6.1.0"
+mockito             = "5.+"
+adarshr-test-logger = "4.0.0"
+xmlunit-core        = "2.12.0"
+junit-pioneer       = "2.3.0"
+teavm               = "0.14.1"
+sonarqube           = "7.3.0.8198"
+openpdf             = "3.0.5"
+
+[libraries]
+# name                      = { module = "", version.ref = "" }
+ant                         = { module = "org.apache.ant:ant", version.ref = "ant" }
+assertj-core                = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+elk-core                    = { module = "org.eclipse.elk:org.eclipse.elk.core", version.ref = "elk" }
+elk-alg-layered             = { module = "org.eclipse.elk:org.eclipse.elk.alg.layered", version.ref = "elk" }
+elk-alg-mrtree              = { module = "org.eclipse.elk:org.eclipse.elk.alg.mrtree", version.ref = "elk" }
+glytching-junit-extensions  = { module = "io.github.glytching:junit-extensions", version.ref = "glytching-junit-ext" }
+jdepend                     = { module = "jdepend:jdepend", version.ref = "jdepend" }
+jlatexmath                  = { module = "org.scilab.forge:jlatexmath", version.ref = "jlatexmath" }
+junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+junit-bom                   = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
+junit-platform-launcher     = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform-launcher" }
+
+mockito-core                = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-junit-jupiter       = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
+xmlunit-core                = { module = "org.xmlunit:xmlunit-core", version.ref = "xmlunit-core" }
+junit-pioneer               = { module = "org.junit-pioneer:junit-pioneer", version.ref = "junit-pioneer" }
+teavm-classlib              = { module = "org.teavm:teavm-classlib", version.ref = "teavm" }
+teavm-jso-apis              = { module = "org.teavm:teavm-jso-apis", version.ref = "teavm" }
+
+openpdf                     = { module = "com.github.librepdf:openpdf", version.ref = "openpdf" }
+
+
+[plugins]
+adarshr-test-logger = { id = "com.adarshr.test-logger", version.ref = "adarshr-test-logger" }
+gorylenko-gradle-git-properties = { id = "com.gorylenko.gradle-git-properties", version.ref = "gorylenko-gradle-git-properties" }
+graalvm-native = { id = "org.graalvm.buildtools.native", version.ref = "graalvm-native" }
+teavm = { id = "org.teavm", version.ref = "teavm" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }

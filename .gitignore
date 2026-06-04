@@ -1,0 +1,19 @@
+# Gradle
+.gradle/
+build/
+
+# Log produced by the MCP server in stdio mode
+plantuml-mcp.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+bin

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: plantuml-mcp
+  main:
+    # stdout is the MCP transport channel in stdio mode: keep it clean.
+    banner-mode: off
+    web-application-type: none
+  ai:
+    mcp:
+      server:
+        name: plantuml-mcp
+        version: 1.0.0
+        # Synchronous server, required for the STDIO transport to start
+        # correctly and keep the process alive waiting on stdin.
+        type: SYNC
+        # Launch the server as a subprocess communicating over STDIN/STDOUT,
+        # as expected by MCP clients such as LM Studio.
+        stdio: true
+
+# Never log to the console in stdio mode: any non-protocol bytes written to
+# stdout corrupt the JSON-RPC stream. The empty console pattern below may emit
+# a harmless "Empty or null pattern" warning on startup, which can be ignored.
+# All logging is redirected to a file instead.
+logging:
+  file:
+    name: plantuml-mcp.log
+  pattern:
+    console:

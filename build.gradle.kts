@@ -20,6 +20,7 @@ java {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -34,7 +35,7 @@ dependencies {
 	// it is harmless in STDIO mode where web-application-type stays "none".
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.ai:spring-ai-starter-mcp-server-webmvc")
-	implementation("net.sourceforge.plantuml:plantuml:1.2026.5")
+	implementation("net.sourceforge.plantuml:plantuml:1.2026.6")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

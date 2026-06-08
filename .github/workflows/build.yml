@@ -7,6 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Allow the workflow to create/update releases and push the snapshot tag.
+permissions:
+  contents: write
+
 jobs:
   bootjar:
     runs-on: ubuntu-latest
@@ -27,9 +31,32 @@ jobs:
       - name: Build bootJar
         run: ./gradlew bootJar --no-daemon
 
-      - name: Upload bootJar
+      # On pull requests, just keep the jar as a build artifact (no release).
+      - name: Upload bootJar (PR builds)
+        if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: plantuml-mcp-bootjar
           path: build/libs/*.jar
           if-no-files-found: error
+
+      # On pushes to main (and manual runs), publish the jar as a rolling
+      # "snapshot" prerelease. The snapshot tag is force-moved to the current
+      # commit and the release assets are replaced on every run.
+      - name: Publish snapshot release
+        if: github.event_name != 'pull_request'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: snapshot
+          name: Snapshot build
+          prerelease: true
+          # Recreate the release each run so the tag tracks the latest commit
+          # on main and stale assets are removed.
+          make_latest: false
+          body: |
+            Automated snapshot built from the latest commit on `main`.
+
+            Commit: ${{ github.sha }}
+            Built: ${{ github.run_id }}
+          files: build/libs/*.jar
+          fail_on_unmatched_files: true
